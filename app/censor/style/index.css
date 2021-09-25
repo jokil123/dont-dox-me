@@ -1,25 +1,18 @@
-/*
-.textCensor {
-  :not(img) {
-    background-color: black;
-    opacity: 1;
-
-    ::selection {
-      opacity: 0;
-    }
-
-    :active {
-      background-color: #00000000;
-    }
-  }
-
-  img {
-    filter: blur(10px) saturate(0);
-  }
+.censor.image {
+  -webkit-filter: blur(10px) saturate(0.5);
+          filter: blur(10px) saturate(0.5);
 }
-*/
-.textCensor :not(*) {
-  -webkit-filter: blur(10px);
-          filter: blur(10px);
+
+.censor.text {
+  color: #00000000;
+  background-color: black;
+}
+
+.censor.text::-moz-selection {
+  background-color: blue;
+}
+
+.censor.text::selection {
+  background-color: blue;
 }
 /*# sourceMappingURL=index.css.map */

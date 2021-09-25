@@ -1,26 +1,14 @@
-/*
-.textCensor {
-  :not(img) {
+.censor {
+  &.image {
+    filter: blur(10px) saturate(0.5);
+  }
+
+  &.text {
+    color: #00000000;
     background-color: black;
-    opacity: 1;
 
-    ::selection {
-      opacity: 0;
+    &::selection {
+      background-color: blue;
     }
-
-    :active {
-      background-color: #00000000;
-    }
-  }
-
-  img {
-    filter: blur(10px) saturate(0);
-  }
-}
-*/
-
-.textCensor {
-  :not(*) {
-    filter: blur(10px);
   }
 }

@@ -14,12 +14,27 @@ var containsIllegalAlien = function (str, illegalAliens) {
         }
     });
 };
+var illegalAliensPosition = function (element, illegalAliens) {
+    var alienPositions = [];
+    illegalAliens.forEach(function (illegalAlien) {
+        var startIndex = element.textContent.indexOf(illegalAlien);
+        if (startIndex >= 0) {
+            alienPositions.push([startIndex, startIndex + illegalAlien.length]);
+        }
+    });
+    return alienPositions;
+};
 var inspectHtmlTag = function (element) {
     console.log(element.tagName);
     console.log(element.textContent);
 };
 var findIllegalAliens = function (element, illegalAliens) {
-    // This is the ineffective version
+    var illegalAlienElements = [];
+    var iteratorFunction = function (element) {
+        illegalAliensPosition(element, illegalAliens);
+    };
+    htmlRecursive(element);
+    return illegalAlienElements;
 };
 var htmlRecursive = function (element, iteratorFunction, discriminatorFunction) {
     iteratorFunction(element);
@@ -31,6 +46,5 @@ var htmlRecursive = function (element, iteratorFunction, discriminatorFunction) 
 };
 var illegalAliens = ["amogus", "suspicious", "sus"];
 var a = dirtySweep(document.body, illegalAliens);
-htmlRecursive(document.body, inspectHtmlTag, function (element) {
-    return containsIllegalAlien(element.textContent, illegalAliens);
-});
+htmlRecursive(document.body, inspectHtmlTag);
+;

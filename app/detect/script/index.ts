@@ -25,6 +25,22 @@ let containsIllegalAlien = (
   });
 };
 
+let illegalAliensPosition = (
+  element: HTMLElement,
+  illegalAliens: Array<string>
+): [Number, Number][] => {
+  let alienPositions: [Number, Number][] = [];
+
+  illegalAliens.forEach((illegalAlien) => {
+    let startIndex = element.textContent.indexOf(illegalAlien);
+    if (startIndex >= 0) {
+      alienPositions.push([startIndex, startIndex + illegalAlien.length]);
+    }
+  });
+
+  return alienPositions;
+};
+
 let inspectHtmlTag = (element: Element) => {
   console.log(element.tagName);
   console.log(element.textContent);
@@ -33,8 +49,16 @@ let inspectHtmlTag = (element: Element) => {
 let findIllegalAliens = (
   element: Element,
   illegalAliens: Array<string>
-): [HTMLElement, number, number] => {
-  // This is the ineffective version
+): [Element, Number, Number][] => {
+  let illegalAlienElements: [Element, Number, Number][] = [];
+
+  let iteratorFunction = (element: Element) => {
+    illegalAliensPosition(element, illegalAliens)
+  }
+
+  htmlRecursive(element, )
+
+  return illegalAlienElements;
 };
 
 let htmlRecursive = (
@@ -55,6 +79,5 @@ let illegalAliens = ["amogus", "suspicious", "sus"];
 
 let a = dirtySweep(document.body, illegalAliens);
 
-htmlRecursive(document.body, inspectHtmlTag, (element: Element): boolean => {
-  return containsIllegalAlien(element.textContent, illegalAliens);
+htmlRecursive(document.body, inspectHtmlTag, ;
 });
