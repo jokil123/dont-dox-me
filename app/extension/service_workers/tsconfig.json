@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "watch": true,
+    "lib": ["ES6", "DOM"],
+    "module": "ES6",
+    "target": "ES6"
+  }
+}
