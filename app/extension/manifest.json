@@ -4,18 +4,18 @@
   "version": "0.1",
   "manifest_version": 3,
   "background": {
-    "service_worker": "service_workers/background.js"
+    "service_worker": "scripts/service_worker/background.js"
   },
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
-      "js": ["service_workers/script_loader.js"]
+      "js": ["scripts/script_loader.js"],
+      "matches": ["<all_urls>"]
     }
   ],
   "web_accessible_resources": [
     {
-      "matches": ["<all_urls>"],
-      "resources": ["service_workers/index.js", "service_workers/toImport.js"]
+      "resources": ["scripts/inject/*"],
+      "matches": ["<all_urls>"]
     }
   ]
 }

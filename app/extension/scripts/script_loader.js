@@ -2,7 +2,7 @@
 
 const script = document.createElement("script");
 script.setAttribute("type", "module");
-script.setAttribute("src", chrome.runtime.getURL("service_workers/index.js"));
+script.setAttribute("src", chrome.runtime.getURL("scripts/inject/index.js"));
 const head =
   document.head ||
   document.getElementsByTagName("head")[0] ||
