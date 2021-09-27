@@ -4,13 +4,13 @@ export const containsIllegalAlien = (
 ): boolean => {
   let contentArray = Array.from(content);
 
-  contentArray.map((x) => {
+  contentArray = contentArray.map((x) => {
     return preProcessText(x);
   });
 
   return contentArray.some((contentItem) => {
     return illegalAliens.some((illegalAlien) => {
-      if (content.indexOf(illegalAlien) >= 0) {
+      if (contentItem.indexOf(illegalAlien) >= 0) {
         return true;
       }
     });

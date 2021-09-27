@@ -1,4 +1,4 @@
-import { containsIllegalAlien } from "./textCheck";
+import { containsIllegalAlien } from "./textCheck.js";
 
 export const findIllegalAlienElements = (
   element: Element,
@@ -13,7 +13,7 @@ export const findIllegalAlienElements = (
   };
 
   const discriminatorFunction = (element: Element): boolean => {
-    return containsIllegalAlien(element.textContent, illegalAliens);
+    return containsIllegalAlien(element.innerHTML, illegalAliens);
   };
 
   ElementRecursive(element, iteratorFunction, discriminatorFunction);
