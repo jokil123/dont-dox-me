@@ -1,4 +1,5 @@
 import { findIllegalAlienElements } from "./findIllegalElements.js";
+import { censorElement } from "./censor.js";
 
 let illegalAliens = ["amogus", "suspicious", "sus"];
 

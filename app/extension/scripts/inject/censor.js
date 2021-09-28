@@ -1,4 +1,4 @@
-var censorText = function (node, start, end) {
+let censorText = (node, start, end) => {
     if (isTextNode) {
         node.before(document.createTextNode(node.textContent.substring(0, start)));
         node.after(document.createTextNode(node.textContent.substring(end)));
@@ -11,20 +11,20 @@ var censorText = function (node, start, end) {
         throw TypeError;
     }
 };
-var censorElement = function (element) {
-    var censorSpan = document.createElement("span");
+let censorElement = (element) => {
+    let censorSpan = document.createElement("span");
     censorSpan.appendChild(element.cloneNode(true));
     censorSpan.className = "censor element";
     element.parentElement.appendChild(censorSpan);
     element.remove();
 };
-var isTextNode = function (node) {
+let isTextNode = (node) => {
     if (node.nodeName == "#text") {
         return true;
     }
 };
-var init = function () {
-    var el = document.getElementById("test");
+let init = () => {
+    let el = document.getElementById("test");
     censorText(el.childNodes[0], 1, 5);
     censorElement(el);
 };

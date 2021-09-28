@@ -1,9 +1,8 @@
 export const containsIllegalAlien = (content, illegalAliens) => {
-    let contentArray = Array.from(content);
-    contentArray = contentArray.map((x) => {
+    content = content.map((x) => {
         return preProcessText(x);
     });
-    return contentArray.some((contentItem) => {
+    return content.some((contentItem) => {
         return illegalAliens.some((illegalAlien) => {
             if (contentItem.indexOf(illegalAlien) >= 0) {
                 return true;

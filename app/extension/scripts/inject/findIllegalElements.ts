@@ -13,7 +13,10 @@ export const findIllegalAlienElements = (
   };
 
   const discriminatorFunction = (element: Element): boolean => {
-    return containsIllegalAlien(element.innerHTML, illegalAliens);
+    return (
+      containsIllegalAlien([element.innerHTML], illegalAliens) ||
+      IsElementSus(element, illegalAliens)
+    );
   };
 
   ElementRecursive(element, iteratorFunction, discriminatorFunction);
