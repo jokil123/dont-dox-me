@@ -1,4 +1,4 @@
-let censorText = (node, start, end) => {
+export const censorText = (node, start, end) => {
     if (isTextNode) {
         node.before(document.createTextNode(node.textContent.substring(0, start)));
         node.after(document.createTextNode(node.textContent.substring(end)));
@@ -11,12 +11,12 @@ let censorText = (node, start, end) => {
         throw TypeError;
     }
 };
-let censorElement = (element) => {
+export const censorElement = (el) => {
     let censorSpan = document.createElement("span");
-    censorSpan.appendChild(element.cloneNode(true));
-    censorSpan.className = "censor element";
-    element.parentElement.appendChild(censorSpan);
-    element.remove();
+    el.parentElement.insertBefore(censorSpan, el);
+    censorSpan.className = "censor el";
+    el.remove();
+    censorSpan.appendChild(el);
 };
 let isTextNode = (node) => {
     if (node.nodeName == "#text") {
