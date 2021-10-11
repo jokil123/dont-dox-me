@@ -1,0 +1,15 @@
+{
+  "name": "webpackextension2",
+  "version": "1.0.0",
+  "description": "none",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --config webpack.prod.js",
+    "start": "webpack serve --open --config webpack.dev.js"
+  },
+  "author": "jo_kil",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack-run-chrome-extension": "^0.4.0"
+  }
+}
