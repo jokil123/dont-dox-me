@@ -3,7 +3,7 @@ const path = require("path");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const ExtReloader = require("webpack-ext-reloader");
+const RunChromeExtension = require("webpack-run-chrome-extension");
 //const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const config = {
@@ -60,9 +60,9 @@ const config = {
     extensions: [".tsx", ".ts", ".js"],
   },
   plugins: [
-    new ExtReloader({
-      manifest: path.resolve(__dirname, "./src/manifest.json"),
-      reload: true,
+    new RunChromeExtension({
+      extensionPath: path.resolve(__dirname, "./src"),
+      startingUrl: "C:/GIT/dont-dox-me/app/censor-test-page/index.html",
       port: 8001,
     }),
     new CleanWebpackPlugin(),
