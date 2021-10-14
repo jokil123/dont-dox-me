@@ -6,13 +6,13 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["./content/index.ts"]
+      "js": ["content.bundle.ts"]
     }
   ],
   "background": {
     "service_workers": ["background.bundle.js"]
   },
   "action": {
-    "default_popup": "./popup/index.html"
+    "default_popup": "popup.bundle.html"
   }
 }
