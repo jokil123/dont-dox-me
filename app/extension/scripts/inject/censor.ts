@@ -14,7 +14,7 @@ export const censorText = (node: ChildNode, start: number, end: number) => {
 
 export const censorElement = (el: Element) => {
   let censorSpan = document.createElement("span");
-  el.parentElement.insertBefore(censorSpan, el);
+  el.parentElement.appendChild(censorSpan);
   censorSpan.className = "censor el";
   el.remove();
   censorSpan.appendChild(el);
