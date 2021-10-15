@@ -1,0 +1,14 @@
+.censor {
+  &.image {
+    filter: blur(10px) saturate(0.5);
+  }
+
+  &.text {
+    color: #00000000;
+    background-color: black;
+
+    &::selection {
+      background-color: blue;
+    }
+  }
+}

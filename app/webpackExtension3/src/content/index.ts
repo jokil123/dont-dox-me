@@ -1,23 +1,32 @@
-import { mergeSelection, wrapWithSpan } from "./censorTextNode";
+import "./censorStyle.scss";
+
+import { wrapWithSpans } from "./censorTextNode";
 import { getTextNodesIn } from "./getTextNodes";
-import { isIllegalNode } from "./isIllegal";
+import { findIllegalNodeContent } from "./isIllegal";
 
 console.log('Content Script: "Hello World"');
 
-let illegals = ["sus", "among"];
+let illegals = [
+  "sus",
+  "among",
+  "imposter",
+  "impostor",
+  "amogus",
+  "among us",
+  "amongus",
+  "impostors",
+  "imposters",
+];
 
 let nodes = getTextNodesIn(document.body, true);
 
 nodes.forEach((node) => {
-  let out = isIllegalNode(node, illegals);
-  if (out.illegal) {
-    out.pos.forEach((p) => {
-      wrapWithSpan(node, p[0], p[1]);
+  let pos = findIllegalNodeContent(node, illegals);
+  if (pos.length != 0) {
+    let spans = wrapWithSpans(node, pos);
+
+    spans.forEach((span) => {
+      span.className = "censor text";
     });
   }
 });
-
-mergeSelection([
-  [2, 4],
-  [1, 3],
-]);
