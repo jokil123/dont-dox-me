@@ -1,4 +1,4 @@
-import { wrapWithSpan } from "./censorTextNode";
+import { mergeSelection, wrapWithSpan } from "./censorTextNode";
 import { getTextNodesIn } from "./getTextNodes";
 import { isIllegalNode } from "./isIllegal";
 
@@ -16,3 +16,8 @@ nodes.forEach((node) => {
     });
   }
 });
+
+mergeSelection([
+  [2, 4],
+  [1, 3],
+]);

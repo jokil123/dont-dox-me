@@ -22,3 +22,31 @@ export const wrapWithSpan = (
 
   return span;
 };
+
+export const wrapWithSpans = (
+  node: Node,
+  wrapElements: [number, number][]
+): HTMLSpanElement[] => {
+  let spans: HTMLSpanElement[] = [];
+
+  return spans;
+};
+
+export const mergeSelections = (
+  selections: [number, number][]
+) /*: [number, number][]*/ => {
+  let activeSelections = 0;
+
+  selections.sort((a, b) => {
+    return a[0] - b[0];
+  });
+
+  let mergedSels: [number, number][] = [selections[0]];
+
+  for (let i = 1; i < mergedSels.length; i++) {
+    const sel = mergedSels[i];
+
+    if (mergedSels.at(-1)?.[1]) {
+    }
+  }
+};
