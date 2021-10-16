@@ -14,5 +14,6 @@
   },
   "action": {
     "default_popup": "popup.bundle.html"
-  }
+  },
+  "permissions": ["storage"]
 }
