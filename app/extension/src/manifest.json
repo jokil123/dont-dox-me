@@ -1,6 +1,6 @@
 {
-  "name": "Dont dox me webpack test 3",
-  "description": "webpack test 3",
+  "name": "Don't Dox Me",
+  "description": "an extension which prevents you from doxing yourself",
   "version": "0.1",
   "manifest_version": 3,
   "content_scripts": [
