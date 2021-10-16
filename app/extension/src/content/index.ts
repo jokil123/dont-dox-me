@@ -3,7 +3,7 @@ import "./censorStyle.scss";
 import { wrapWithSpans } from "./censorTextNode";
 import { getTextNodesIn } from "./getTextNodes";
 import { findIllegalNodeContent } from "./isIllegal";
-import { storageTest } from "./asyncChromeStorage";
+import { storage } from "./asyncChromeStorage";
 
 console.log('Content Script: "Hello World"');
 
@@ -31,5 +31,3 @@ nodes.forEach((node) => {
     });
   }
 });
-
-storageTest();

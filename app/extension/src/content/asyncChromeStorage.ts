@@ -1,9 +1,4 @@
-export const storageTest = async () => {
-  await storage.set({ test: "stuff" });
-  console.log(await storage.get(["test"]));
-};
-
-const storage = {
+export const storage = {
   set: (item: { [key: string]: any }): Promise<void> => {
     let promise = new Promise<void>((resolve, reject) => {
       try {
