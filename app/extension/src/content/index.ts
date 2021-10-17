@@ -5,6 +5,10 @@ import { getTextNodesIn } from "./getTextNodes";
 import { findIllegalNodeContent } from "./isIllegal";
 import { storage } from "./asyncChromeStorage";
 
+const main = async () => {
+  const settings = 
+};
+
 console.log('Content Script: "Hello World"');
 
 let illegals = [

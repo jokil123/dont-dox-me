@@ -14,3 +14,13 @@
   ]
 }
 ```
+
+## StorageBuckets
+
+dict
+
+```
+{
+  rules: [int-ids...]
+}
+```
