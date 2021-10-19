@@ -3,11 +3,13 @@ import "./censorStyle.scss";
 import { wrapWithSpans } from "./censorTextNode";
 import { getTextNodesIn } from "./getTextNodes";
 import { findIllegalNodeContent } from "./isIllegal";
-import { storage } from "./asyncChromeStorage";
+import { loadSettings } from "./loadSettings";
 
-const main = async () => {
-  const settings = 
-};
+// const main = async () => {
+//   const settings =
+// };
+
+loadSettings();
 
 console.log('Content Script: "Hello World"');
 

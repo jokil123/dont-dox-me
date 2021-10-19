@@ -1,29 +1,38 @@
-export const set = (item: { [key: string]: any }): Promise<void> => {
-  let promise = new Promise<void>((resolve, reject) => {
+export const set = (item: { [key: string]: any }) => {
+  return new Promise<void>((resolve, reject) => {
     try {
       chrome.storage.sync.set(item, resolve);
-    } catch {
+    } catch (e) {
+      console.error(e);
       reject();
     }
   });
-
-  return promise;
 };
 
 export const get = (
   keys?: string | string[] | { [key: string]: any } | null | undefined[]
-): Promise<{ [key: string]: any }> => {
-  let promise = new Promise<{ [key: string]: any }>((resolve, reject) => {
+) => {
+  return new Promise<{ [key: string]: any }>((resolve, reject) => {
     try {
       if (keys) {
         chrome.storage.sync.get(keys, resolve);
       } else {
         chrome.storage.sync.get(resolve);
       }
-    } catch {
+    } catch (e) {
+      console.error(e);
       reject();
     }
   });
+};
 
-  return promise;
+export const remove = (keys: string | string[]) => {
+  return new Promise<void>((resolve, reject) => {
+    try {
+      chrome.storage.sync.remove(keys, resolve);
+    } catch (e) {
+      console.error(e);
+      reject();
+    }
+  });
 };
