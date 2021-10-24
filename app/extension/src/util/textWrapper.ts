@@ -1,14 +1,13 @@
 // wraps a span around a substring in a text node and returns it
 export const wrapWithSpan = (
   node: Node,
-  start: number,
-  end: number
+  position: [number, number]
 ): HTMLSpanElement => {
   let nodeText = node.textContent ? node.textContent : "";
 
-  let beforeText = nodeText.substring(0, start);
-  let middleText = nodeText.substring(start, end);
-  let afterText = nodeText.substring(end);
+  let beforeText = nodeText.substring(0, position[0]);
+  let middleText = nodeText.substring(position[0], position[1]);
+  let afterText = nodeText.substring(position[1]);
 
   let span = document.createElement("span");
   span.innerHTML = middleText;
@@ -26,13 +25,13 @@ export const wrapWithSpan = (
 // wraps spans around a collection of substrings and returns them
 export const wrapWithSpans = (
   node: Node,
-  wrapElements: [number, number][]
+  positions: [number, number][]
 ): HTMLSpanElement[] => {
   let spans: HTMLSpanElement[] = [];
 
-  let sels = mergeSelections(wrapElements).reverse();
-  sels.forEach((sel) => {
-    let span = wrapWithSpan(node, sel[0], sel[1]);
+  let mergedPositions = mergeSelections(positions).reverse();
+  mergedPositions.forEach((sel) => {
+    let span = wrapWithSpan(node, [sel[0], sel[1]]);
     spans.push(span);
 
     if (span.previousSibling) {
