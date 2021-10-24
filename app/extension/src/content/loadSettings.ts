@@ -1,18 +1,15 @@
 import * as storage from "./util/asyncChromeStorage";
+import { settings, rule } from "./settingsInterface";
+import { generateId } from "./util/idGenerator";
 
-export interface setting {
-  text: string;
-}
+export const loadSettings = async (): Promise<settings> => {
+  let config = (await storage.get("config"))["config"];
 
-export const loadSettings = async (): Promise<setting[]> => {
-  await storage.set({ storageBuckets: ["a", "b"] });
-  await storage.set({ a: { text: "aText" } });
-  await storage.set({ b: { text: "bText" } });
   let storageBuckets: string[] = (await storage.get("storageBuckets"))[
     "storageBuckets"
   ];
 
-  let settings: setting[] = (
+  let rules: rule[] = (
     await Promise.all(
       storageBuckets.map((bucket) => {
         return storage.get(bucket);
@@ -22,7 +19,10 @@ export const loadSettings = async (): Promise<setting[]> => {
     return Object.values(setting)[0];
   });
 
-  return settings;
+  return <settings>{
+    ...config,
+    rules: rules,
+  };
 };
 
 export const deleteSettings = async (settingIds: string[]): Promise<void> => {
@@ -38,6 +38,27 @@ export const deleteSettings = async (settingIds: string[]): Promise<void> => {
     ...settingIds.map((settingId) => {
       return storage.remove(settingId);
     }),
+    storage.set({ storageBuckets: storageBuckets }),
+  ]);
+};
+
+export const overwriteSettings = async (settings: settings) => {
+  await storage.clear();
+
+  let rulesDict: { [key: string]: rule } = {};
+
+  settings.rules.forEach((rule) => {
+    rulesDict[`bucket_${generateId(20)}`] = rule;
+  });
+
+  let storageBuckets = Object.keys(rulesDict);
+
+  let config: any = { ...settings };
+  delete config.rules;
+
+  await Promise.all([
+    storage.set({ config: config }),
+    storage.set(rulesDict),
     storage.set({ storageBuckets: storageBuckets }),
   ]);
 };

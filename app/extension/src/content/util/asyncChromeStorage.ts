@@ -3,8 +3,7 @@ export const set = (item: { [key: string]: any }) => {
     try {
       chrome.storage.sync.set(item, resolve);
     } catch (e) {
-      console.error(e);
-      reject();
+      reject(e);
     }
   });
 };
@@ -20,8 +19,7 @@ export const get = (
         chrome.storage.sync.get(resolve);
       }
     } catch (e) {
-      console.error(e);
-      reject();
+      reject(e);
     }
   });
 };
@@ -31,8 +29,17 @@ export const remove = (keys: string | string[]) => {
     try {
       chrome.storage.sync.remove(keys, resolve);
     } catch (e) {
-      console.error(e);
-      reject();
+      reject(e);
+    }
+  });
+};
+
+export const clear = () => {
+  return new Promise<void>((resolve, reject) => {
+    try {
+      chrome.storage.sync.clear(resolve);
+    } catch (e) {
+      reject(e);
     }
   });
 };

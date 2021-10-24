@@ -1,4 +1,6 @@
 export interface settings {
   enabled: boolean;
-  rules: string[];
+  rules: rule[];
 }
+
+export type rule = string;
