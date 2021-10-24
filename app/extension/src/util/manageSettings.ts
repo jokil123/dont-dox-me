@@ -1,6 +1,6 @@
-import * as storage from "./util/asyncChromeStorage";
-import { settings, rule } from "./settingsInterface";
-import { generateId } from "./util/idGenerator";
+import * as storage from "./asyncChromeStorage";
+import { settings, rule } from "../content/settingsInterface";
+import { generateId } from "./idGenerator";
 
 export const loadSettings = async (): Promise<settings> => {
   let config = (await storage.get("config"))["config"];

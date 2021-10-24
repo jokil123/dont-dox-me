@@ -1,9 +1,9 @@
 import "./censorStyle.scss";
 
-import { wrapWithSpans } from "./util/textWrapper";
+import { wrapWithSpans } from "../util/textWrapper";
 import { getTextNodesIn } from "./getTextNodes";
 import { findIllegalNodeContent } from "./isIllegal";
-import { loadSettings, overwriteSettings } from "./loadSettings";
+import { loadSettings, overwriteSettings } from "../util/manageSettings";
 import { settings } from "./settingsInterface";
 
 console.log('Content Script: "Hello World"');
