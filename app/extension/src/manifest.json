@@ -13,6 +13,6 @@
     "service_workers": ["background.bundle.js"]
   },
   "action": {
-    "default_popup": "popup.bundle.html"
+    "default_popup": "popup.html"
   }
 }
