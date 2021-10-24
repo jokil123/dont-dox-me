@@ -1,6 +1,6 @@
 import "./censorStyle.scss";
 
-import { wrapWithSpans } from "./censorTextNode";
+import { wrapWithSpans } from "./util/textWrapper";
 import { getTextNodesIn } from "./getTextNodes";
 import { findIllegalNodeContent } from "./isIllegal";
 import { loadSettings } from "./loadSettings";

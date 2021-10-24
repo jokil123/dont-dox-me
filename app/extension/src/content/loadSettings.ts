@@ -1,4 +1,4 @@
-import * as storage from "./asyncChromeStorage";
+import * as storage from "./util/asyncChromeStorage";
 
 export interface setting {
   text: string;
