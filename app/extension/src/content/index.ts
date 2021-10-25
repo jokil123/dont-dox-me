@@ -5,8 +5,7 @@ import { loadSettings, overwriteSettings } from "../util/manageSettings";
 import { settings } from "./settingsInterface";
 import { filterTextMutations } from "./filterMutations";
 import { censorNodes } from "./censorNodes";
-
-console.log('Content Script: "Hello World"');
+import * as pageHide from "./hideWebpage";
 
 const main = async () => {
   let settings: settings = await loadSettings();
@@ -20,6 +19,8 @@ const main = async () => {
   } else {
     await overwriteSettings({ enabled: false, rules: [] });
   }
+
+  pageHide.show();
 
   let observeSettings = {
     subtree: true,
