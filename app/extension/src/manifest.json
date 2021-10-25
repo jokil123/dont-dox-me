@@ -7,6 +7,11 @@
     {
       "matches": ["<all_urls>"],
       "js": ["content.bundle.js"]
+    },
+    {
+      "matches": ["<all_urls>"],
+      "js": ["hideStart.bundle.js"],
+      "run_at": "document_start"
     }
   ],
   "background": {
