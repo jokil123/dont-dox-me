@@ -30,8 +30,16 @@ const main = async () => {
 
   let characterDataObserver = new MutationObserver((m) => {
     characterDataObserver.disconnect();
-    console.log(filterTextMutations(m));
-    censorNodes(filterTextMutations(m), settings.rules);
+
+    console.log({
+      unfiltered: m,
+      filtered: filterTextMutations(m),
+    });
+
+    filterTextMutations(m).forEach((m) => {
+      censorNodes(getTextNodesIn(m, true), settings.rules);
+    });
+
     characterDataObserver.observe(document.body, observeSettings);
   });
 
