@@ -1,8 +1,8 @@
 import "./censorStyle.scss";
 
 import { getTextNodesIn } from "./getTextNodes";
-import { loadSettings, overwriteSettings } from "../util/manageSettings";
-import { settings } from "./settingsInterface";
+import { loadSettings, overwriteSettings } from "../../util/manageSettings";
+import { settings } from "../../util/settingsInterface";
 import { filterTextMutations } from "./filterMutations";
 import { censorNodes } from "./censorNodes";
 import * as pageHide from "./hideWebpage";

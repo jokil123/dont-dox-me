@@ -1,5 +1,5 @@
 import * as storage from "./asyncChromeStorage";
-import { settings, rule } from "../content/settingsInterface";
+import { settings, rule } from "./settingsInterface";
 import { generateId } from "./idGenerator";
 
 export const loadSettings = async (): Promise<settings> => {

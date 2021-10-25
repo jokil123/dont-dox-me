@@ -1,4 +1,4 @@
-import { wrapWithSpans } from "../util/textWrapper";
+import { wrapWithSpans } from "../../util/textWrapper";
 import { findIllegalNodeContent } from "./isIllegal";
 
 export const censorNodes = (nodes: Node[], illegals: string[]) => {
