@@ -1,10 +1,10 @@
 import "./censorStyle.scss";
 
-import { wrapWithSpans } from "../util/textWrapper";
 import { getTextNodesIn } from "./getTextNodes";
-import { findIllegalNodeContent } from "./isIllegal";
 import { loadSettings, overwriteSettings } from "../util/manageSettings";
 import { settings } from "./settingsInterface";
+import { filterTextMutations } from "./filterMutations";
+import { censorNodes } from "./censorNodes";
 
 console.log('Content Script: "Hello World"');
 
@@ -15,20 +15,35 @@ const main = async () => {
     if (settings.enabled) {
       let nodes = getTextNodesIn(document.body, true);
 
-      nodes.forEach((node) => {
-        let pos = findIllegalNodeContent(node, settings.rules);
-        if (pos.length != 0) {
-          let spans = wrapWithSpans(node, pos);
-
-          spans.forEach((span) => {
-            span.className = "censor text";
-          });
-        }
-      });
+      censorNodes(nodes, settings.rules);
     }
   } else {
     await overwriteSettings({ enabled: false, rules: [] });
   }
+
+  let observeSettings = {
+    subtree: true,
+    characterData: true,
+    attributes: true,
+    childList: true,
+  };
+
+  let characterDataObserver = new MutationObserver((m) => {
+    characterDataObserver.disconnect();
+
+    console.log({
+      unfiltered: m,
+      filtered: filterTextMutations(m),
+    });
+
+    filterTextMutations(m).forEach((m) => {
+      censorNodes(getTextNodesIn(m, true), settings.rules);
+    });
+
+    characterDataObserver.observe(document.body, observeSettings);
+  });
+
+  characterDataObserver.observe(document.body, observeSettings);
 };
 
 main();
