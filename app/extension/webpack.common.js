@@ -6,7 +6,7 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 module.exports = {
   entry: {
     background: "./src/background/index.ts",
-    content: "./src/content/index.ts",
+    content: "./src/content/censor/index.ts",
     popup: "./src/popup/index.ts",
     hideStart: "./src/content/startHidden/index.ts",
   },

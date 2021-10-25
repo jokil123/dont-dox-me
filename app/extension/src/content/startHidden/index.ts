@@ -1,3 +1,3 @@
-import * as pageHide from "../hideWebpage";
+import * as pageHide from "../censor/hideWebpage";
 
 pageHide.hide();
