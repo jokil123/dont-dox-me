@@ -6,6 +6,7 @@ import { settings } from "../../util/settingsInterface";
 import { filterTextMutations } from "./filterMutations";
 import { censorNodes } from "./censorNodes";
 import * as pageHide from "./hideWebpage";
+import { filterNodes } from "./censorIgnore";
 
 const main = async () => {
   let settings: settings = await loadSettings();
@@ -14,7 +15,7 @@ const main = async () => {
     if (settings.enabled) {
       let nodes = getTextNodesIn(document.body, true);
 
-      censorNodes(nodes, settings.rules);
+      censorNodes(filterNodes(nodes), settings.rules);
     }
   } else {
     await overwriteSettings({ enabled: false, rules: [] });
@@ -32,10 +33,10 @@ const main = async () => {
   let characterDataObserver = new MutationObserver((m) => {
     characterDataObserver.disconnect();
 
-    console.log({
-      unfiltered: m,
-      filtered: filterTextMutations(m),
-    });
+    // console.log({
+    //   unfiltered: m,
+    //   filtered: filterTextMutations(m),
+    // });
 
     filterTextMutations(m).forEach((m) => {
       censorNodes(getTextNodesIn(m, true), settings.rules);
