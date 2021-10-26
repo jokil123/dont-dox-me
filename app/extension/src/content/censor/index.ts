@@ -33,13 +33,24 @@ const main = async () => {
   let characterDataObserver = new MutationObserver((m) => {
     characterDataObserver.disconnect();
 
-    // console.log({
-    //   unfiltered: m,
-    //   filtered: filterTextMutations(m),
-    // });
+    let filteredTextMutations = filterTextMutations(m);
 
-    filterTextMutations(m).forEach((m) => {
+    let hiddenElements: HTMLElement[] = [];
+
+    filteredTextMutations.forEach((e) => {
+      if (e.parentElement) {
+        hiddenElements.push(e.parentElement);
+        pageHide.hide(e.parentElement);
+        console.log();
+      }
+    });
+
+    filteredTextMutations.forEach((m) => {
       censorNodes(getTextNodesIn(m, true), settings.rules);
+    });
+
+    hiddenElements.forEach((e) => {
+      pageHide.show(e);
     });
 
     characterDataObserver.observe(document.body, observeSettings);
