@@ -9,6 +9,25 @@ import * as pageHide from "./hideWebpage";
 import { filterNodes } from "./censorIgnore";
 
 const main = async () => {
+  overwriteSettings({
+    enabled: true,
+    rules: [
+      "sus",
+      "sussy",
+      "imposter",
+      "impostor",
+      "imposters",
+      "impostors",
+      "among us",
+      "amongus",
+      "amogus",
+      "among",
+      "amog",
+      "crewmate",
+      "crewmates",
+    ],
+  });
+
   let settings: settings = await loadSettings();
 
   if (settings) {
