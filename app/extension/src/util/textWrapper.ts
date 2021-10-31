@@ -29,17 +29,19 @@ export const wrapWithSpans = (
 ): HTMLSpanElement[] => {
   let spans: HTMLSpanElement[] = [];
 
-  let mergedPositions = mergeSelections(positions).reverse();
-  mergedPositions.forEach((sel) => {
-    let span = wrapWithSpan(node, [sel[0], sel[1]]);
-    spans.push(span);
+  if (node.parentNode) {
+    let mergedPositions = mergeSelections(positions).reverse();
+    mergedPositions.forEach((sel) => {
+      let span = wrapWithSpan(node, [sel[0], sel[1]]);
+      spans.push(span);
 
-    if (span.previousSibling) {
-      node = span.previousSibling;
-    } else {
-      throw ReferenceError;
-    }
-  });
+      if (span.previousSibling) {
+        node = span.previousSibling;
+      } else {
+        throw ReferenceError;
+      }
+    });
+  }
 
   return spans;
 };
