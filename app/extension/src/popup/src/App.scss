@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+.App {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+
+background: #292929;
+  h1 {
+    font-family: 'Press Start 2P', cursive;
+    color: white;
+    font-size: 40px;
+    padding-top: 20px;
+
+    span {
+    text-decoration: none;
+    position: relative; }
+  }
+
+  span::before{
+    content: '';
+    width: 105%;
+    position: absolute;
+    right: 0;
+    top: calc( 50% - 7px );
+    border-bottom: 7px solid rgba(255,0,0,1);
+}
+
+p {
+  margin-top: 15vh;
+  font-family: 'Press Start 2P', cursive;
+  color: white;
+  font-size: 15px;
+}
+
+h2 {
+   font-family: 'Press Start 2P', cursive;
+   font-size: 30px;
+   padding-top: 6px;
+}
+  
+  
+}
+
