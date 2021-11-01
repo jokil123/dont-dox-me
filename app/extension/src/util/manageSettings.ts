@@ -15,10 +15,7 @@ export const loadSettings = async (): Promise<Settings> => {
   )["storageBuckets"];
 
   if (!config || !storageBuckets) {
-    console.log({
-      ...(await storage.get(["config"])),
-      ...(await storage.get(["storageBuckets"])),
-    });
+    console.log("couldn't find settings, loading defaults");
 
     await overwriteSettings({ enabled: true, rules: ["default stuff"] });
     return await loadSettings();
@@ -77,5 +74,5 @@ export const overwriteSettings = async (settings: Settings) => {
     storage.set({ storageBuckets: storageBuckets }),
   ]);
 
-  console.log(await storage.get());
+  console.log({ storageDump: await storage.get() });
 };

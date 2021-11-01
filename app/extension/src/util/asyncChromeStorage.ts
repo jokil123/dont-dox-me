@@ -12,34 +12,22 @@ export const get = (
   keys?: string | string[] | { [key: string]: any } | null | undefined[]
 ) => {
   return new Promise<{ [key: string]: any }>((resolve, reject) => {
-    try {
-      if (keys) {
-        chrome.storage.sync.get(keys, resolve);
-      } else {
-        chrome.storage.sync.get(resolve);
-      }
-    } catch (e) {
-      reject(e);
+    if (keys) {
+      chrome.storage.sync.get(keys, resolve);
+    } else {
+      chrome.storage.sync.get(resolve);
     }
   });
 };
 
 export const remove = (keys: string | string[]) => {
   return new Promise<void>((resolve, reject) => {
-    try {
-      chrome.storage.sync.remove(keys, resolve);
-    } catch (e) {
-      reject(e);
-    }
+    chrome.storage.sync.remove(keys, resolve);
   });
 };
 
 export const clear = () => {
   return new Promise<void>((resolve, reject) => {
-    try {
-      chrome.storage.sync.clear(resolve);
-    } catch (e) {
-      reject(e);
-    }
+    chrome.storage.sync.clear(resolve);
   });
 };
