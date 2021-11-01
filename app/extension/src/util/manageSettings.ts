@@ -1,13 +1,28 @@
 import * as storage from "./asyncChromeStorage";
-import { settings, rule } from "./settingsInterface";
+import { Settings, rule } from "./settingsInterface";
 import { generateId } from "./idGenerator";
+import { sendMessagePromise } from "./asyncSendMessage";
 
-export const loadSettings = async (): Promise<settings> => {
-  let config = (await storage.get("config"))["config"];
+export const loadCachedSettings = () => {
+  return <Promise<Settings>>sendMessagePromise("settings");
+};
 
-  let storageBuckets: string[] = (await storage.get("storageBuckets"))[
-    "storageBuckets"
-  ];
+export const loadSettings = async (): Promise<Settings> => {
+  let config = await (await storage.get("config"))["config"];
+
+  let storageBuckets: string[] = await (
+    await storage.get("storageBuckets")
+  )["storageBuckets"];
+
+  if (!config || !storageBuckets) {
+    console.log({
+      ...(await storage.get(["config"])),
+      ...(await storage.get(["storageBuckets"])),
+    });
+
+    await overwriteSettings({ enabled: true, rules: ["default stuff"] });
+    return await loadSettings();
+  }
 
   let rules: rule[] = (
     await Promise.all(
@@ -19,7 +34,7 @@ export const loadSettings = async (): Promise<settings> => {
     return Object.values(setting)[0];
   });
 
-  return <settings>{
+  return <Settings>{
     ...config,
     rules: rules,
   };
@@ -34,7 +49,7 @@ export const deleteSettings = async (settingIds: string[]): Promise<void> => {
     return !settingIds.includes(bucket);
   });
 
-  await Promise.all([
+  Promise.all([
     ...settingIds.map((settingId) => {
       return storage.remove(settingId);
     }),
@@ -42,7 +57,7 @@ export const deleteSettings = async (settingIds: string[]): Promise<void> => {
   ]);
 };
 
-export const overwriteSettings = async (settings: settings) => {
+export const overwriteSettings = async (settings: Settings) => {
   await storage.clear();
 
   let rulesDict: { [key: string]: rule } = {};
@@ -53,12 +68,14 @@ export const overwriteSettings = async (settings: settings) => {
 
   let storageBuckets = Object.keys(rulesDict);
 
-  let config: any = { ...settings };
-  delete config.rules;
+  let configStuff: any = { ...settings };
+  delete configStuff.rules;
 
   await Promise.all([
-    storage.set({ config: config }),
+    storage.set({ config: configStuff }),
     storage.set(rulesDict),
     storage.set({ storageBuckets: storageBuckets }),
   ]);
+
+  console.log(await storage.get());
 };

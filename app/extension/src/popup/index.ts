@@ -1,8 +1,8 @@
 import "./style.scss";
 
-import { loadSettings } from "../util/manageSettings";
+import { loadCachedSettings } from "../util/manageSettings";
 
-loadSettings().then((e) => {
+loadCachedSettings().then((e) => {
   e.rules.forEach((rule) => {
     document.writeln(rule);
   });
