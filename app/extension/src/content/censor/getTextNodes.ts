@@ -1,5 +1,5 @@
 export const getTextNodesIn = (node: Node, includeWhitespaceNodes: boolean) => {
-  var textNodes: Node[] = [],
+  let textNodes: Node[] = [],
     whitespace = /^\s*$/;
 
   const getTextNodes = (node: Node) => {
@@ -11,7 +11,7 @@ export const getTextNodesIn = (node: Node, includeWhitespaceNodes: boolean) => {
         textNodes.push(node);
       }
     } else {
-      for (var i = 0, len = node.childNodes.length; i < len; ++i) {
+      for (let i = 0, len = node.childNodes.length; i < len; ++i) {
         getTextNodes(node.childNodes[i]);
       }
     }

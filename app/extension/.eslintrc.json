@@ -3,6 +3,7 @@
     "browser": true,
     "es2021": true
   },
+  "root": true,
 
   "extends": [
     "eslint:recommended",
@@ -20,7 +21,9 @@
   "plugins": ["prettier"],
 
   "rules": {
-    "prettier/prettier": "error",
-    "no-console": 1
+    "prettier/prettier": ["error", { "endOfLine": "auto" }],
+    "no-console": 1,
+    "prefer-const": "off",
+    "no-constant-condition": "warn"
   }
 }
