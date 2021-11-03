@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export const set = (item: { [key: string]: any }) => {
   return new Promise<void>((resolve, reject) => {
     try {

@@ -22,7 +22,7 @@
 
   "rules": {
     "prettier/prettier": ["error", { "endOfLine": "auto" }],
-    "no-console": 1,
+    "no-console": "warn",
     "prefer-const": "off",
     "no-constant-condition": "warn"
   }
