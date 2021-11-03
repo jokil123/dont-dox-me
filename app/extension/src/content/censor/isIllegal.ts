@@ -31,5 +31,6 @@ export const findAllOccurrences = (text: string, match: string): number[] => {
     occ.push(pos);
     startOffset = pos + match.length;
   }
+
   return occ;
 };
