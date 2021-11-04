@@ -3,8 +3,15 @@ import { Settings, rule } from "./settingsInterface";
 import { generateId } from "./idGenerator";
 import { sendMessagePromise } from "./asyncSendMessage";
 
-export const loadCachedSettings = () => {
-  return <Promise<Settings>>sendMessagePromise("settings");
+export const loadCachedSettings = async () => {
+  let settings = await (<Promise<Settings>>sendMessagePromise("settings"));
+
+  while (!settings) {
+    console.log("Loading settings failed: Retrying!");
+    settings = await (<Promise<Settings>>sendMessagePromise("settings"));
+  }
+
+  return settings;
 };
 
 export const loadSettings = async (): Promise<Settings> => {
@@ -73,6 +80,4 @@ export const overwriteSettings = async (settings: Settings) => {
     storage.set(rulesDict),
     storage.set({ storageBuckets: storageBuckets }),
   ]);
-
-  console.log({ storageDump: await storage.get() });
 };

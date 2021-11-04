@@ -27,7 +27,7 @@ const main = async () => {
 
   const cacheSettings = async () => {
     settings = await loadSettings();
-    console.log({ updatedCache: settings });
+    console.log("Settings were updated", { updatedCache: settings });
   };
 
   await cacheSettings();
@@ -36,7 +36,7 @@ const main = async () => {
   chrome.runtime.onInstalled.addListener(cacheSettings);
 
   chrome.runtime.onMessage.addListener(async (message, sender, reply) => {
-    console.log({ settingsBefore: settings });
+    console.log("Settings were requested", { settings });
 
     if (message == "settings") {
       if (!settings) {
@@ -44,11 +44,6 @@ const main = async () => {
       }
       reply(settings);
     }
-    console.log({
-      settingsAfter: settings,
-      message: message,
-      sender: sender,
-    });
   });
 };
 
