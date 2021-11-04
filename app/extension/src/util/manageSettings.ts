@@ -72,8 +72,8 @@ export const overwriteSettings = async (settings: Settings) => {
 
   let storageBuckets = Object.keys(rulesDict);
 
-  let configStuff: any = { ...settings };
-  delete configStuff.rules;
+  let config: { [key: string]: unknown } = { ...settings };
+  delete config.rules;
 
   await Promise.all([
     storage.set({ config: configStuff }),
