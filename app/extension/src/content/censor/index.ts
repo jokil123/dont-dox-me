@@ -1,48 +1,34 @@
 import "./censorStyle.scss";
 
 import { getTextNodesIn } from "./getTextNodes";
-import { loadSettings, overwriteSettings } from "../../util/manageSettings";
-import { settings } from "../../util/settingsInterface";
+import {
+  loadCachedSettings,
+  overwriteSettings,
+} from "../../util/manageSettings";
+import { Settings } from "../../util/settingsInterface";
 import { censorNodes } from "./censorNodes";
 import * as pageHide from "./hideWebpage";
 import { filterNodes } from "./censorIgnore";
 import { setupObserver } from "./pageMutationHandler";
 
+console.log("Content Script Loaded");
+
 const main = async () => {
-  overwriteSettings({
-    enabled: true,
-    rules: [
-      "sus",
-      "sussy",
-      "imposter",
-      "impostor",
-      "imposters",
-      "impostors",
-      "among us",
-      "amongus",
-      "amogus",
-      "among",
-      "amog",
-      "crewmate",
-      "crewmates",
-    ],
-  });
+  console.log("Censoring Started");
+  let settings: Settings = await loadCachedSettings();
 
-  let settings: settings = await loadSettings();
+  console.log(settings);
 
-  if (settings) {
-    if (settings.enabled) {
-      let nodes = getTextNodesIn(document.body, true);
+  if (settings.enabled) {
+    let nodes = getTextNodesIn(document.body, true);
 
-      censorNodes(filterNodes(nodes), settings.rules);
-    }
-  } else {
-    await overwriteSettings({ enabled: false, rules: [] });
+    censorNodes(filterNodes(nodes), settings.rules);
+    setupObserver(settings);
   }
 
   pageHide.show();
 
-  setupObserver(settings);
+  console.log("Censoring Finished");
 };
 
 main();

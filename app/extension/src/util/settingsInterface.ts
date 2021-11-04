@@ -1,4 +1,4 @@
-export interface settings {
+export interface Settings {
   enabled: boolean;
   rules: rule[];
 }

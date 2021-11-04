@@ -1,7 +1,7 @@
 import { censorNodes } from "./censorNodes";
 import { filterTextMutations } from "./filterMutations";
 import { getTextNodesIn } from "./getTextNodes";
-import { settings } from "../../util/settingsInterface";
+import { Settings } from "../../util/settingsInterface";
 import * as pageHide from "./hideWebpage";
 
 const observeSettings = {
@@ -11,7 +11,7 @@ const observeSettings = {
   childList: true,
 };
 
-export const setupObserver = (settings: settings) => {
+export const setupObserver = (settings: Settings) => {
   let observer = new MutationObserver((m) => {
     observer.disconnect();
 
