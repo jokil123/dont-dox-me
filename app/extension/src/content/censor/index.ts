@@ -1,10 +1,7 @@
 import "./censorStyle.scss";
 
 import { getTextNodesIn } from "./getTextNodes";
-import {
-  loadCachedSettings,
-  overwriteSettings,
-} from "../../util/manageSettings";
+import { loadCachedSettings } from "../../util/manageSettings";
 import { Settings } from "../../util/settingsInterface";
 import { censorNodes } from "./censorNodes";
 import * as pageHide from "./hideWebpage";

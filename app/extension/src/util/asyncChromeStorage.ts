@@ -12,7 +12,7 @@ export const set = (item: { [key: string]: any }) => {
 export const get = (
   keys?: string | string[] | { [key: string]: any } | null | undefined[]
 ) => {
-  return new Promise<{ [key: string]: any }>((resolve, reject) => {
+  return new Promise<{ [key: string]: any }>((resolve) => {
     if (keys) {
       chrome.storage.sync.get(keys, resolve);
     } else {
@@ -22,13 +22,13 @@ export const get = (
 };
 
 export const remove = (keys: string | string[]) => {
-  return new Promise<void>((resolve, reject) => {
+  return new Promise<void>((resolve) => {
     chrome.storage.sync.remove(keys, resolve);
   });
 };
 
 export const clear = () => {
-  return new Promise<void>((resolve, reject) => {
+  return new Promise<void>((resolve) => {
     chrome.storage.sync.clear(resolve);
   });
 };
