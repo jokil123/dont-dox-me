@@ -22,7 +22,10 @@ export const findAllOccurrences = (text: string, match: string): number[] => {
 
   let startOffset = 0;
   while (true) {
-    let pos = text.toLowerCase().indexOf(match.toLowerCase(), startOffset);
+    let pos = text
+      .toLowerCase()
+      .normalize()
+      .indexOf(match.toLowerCase().normalize(), startOffset);
 
     if (pos == -1) {
       break;
