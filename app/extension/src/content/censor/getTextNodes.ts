@@ -1,4 +1,8 @@
-export const getTextNodesIn = (node: Node, includeWhitespaceNodes: boolean) => {
+// returns a list of text nodes in a node recursively (the entire tree)
+export const getTextNodesIn = (
+  node: Node,
+  includeWhitespaceNodes: boolean
+): Node[] => {
   let textNodes: Node[] = [],
     whitespace = /^\s*$/;
 
