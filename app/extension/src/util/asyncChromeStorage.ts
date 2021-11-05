@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+// Promise wrapper for chrome.storage.sync.get
 export const set = (item: { [key: string]: any }) => {
   return new Promise<void>((resolve, reject) => {
     try {
@@ -9,6 +10,7 @@ export const set = (item: { [key: string]: any }) => {
   });
 };
 
+// Promise wrapper for chrome.storage.sync.get
 export const get = (
   keys?: string | string[] | { [key: string]: any } | null | undefined[]
 ) => {
@@ -21,12 +23,14 @@ export const get = (
   });
 };
 
+// Promise wrapper for chrome.storage.sync.remove
 export const remove = (keys: string | string[]) => {
   return new Promise<void>((resolve) => {
     chrome.storage.sync.remove(keys, resolve);
   });
 };
 
+// Promise wrapper for chrome.storage.sync.clear
 export const clear = () => {
   return new Promise<void>((resolve) => {
     chrome.storage.sync.clear(resolve);
