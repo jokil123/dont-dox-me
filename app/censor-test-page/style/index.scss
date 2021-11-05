@@ -12,3 +12,12 @@
     }
   }
 }
+
+.cssAbuse {
+  &::after {
+    content: "after sus ";
+  }
+  &::before {
+    content: " before sus";
+  }
+}

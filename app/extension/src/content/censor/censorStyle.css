@@ -15,12 +15,4 @@
 .censor.text::selection {
   background-color: blue;
 }
-
-.cssAbuse::after {
-  content: "after sus ";
-}
-
-.cssAbuse::before {
-  content: " before sus";
-}
-/*# sourceMappingURL=index.css.map */
+/*# sourceMappingURL=censorStyle.css.map */
