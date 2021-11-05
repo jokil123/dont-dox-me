@@ -1,3 +1,4 @@
+// Generates a unique random id for storage buckets
 export const generateId = (length: number) => {
   let result = "";
   let characters =
