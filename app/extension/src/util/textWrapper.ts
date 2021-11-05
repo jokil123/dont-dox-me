@@ -1,4 +1,4 @@
-// wraps a span around a substring (start and end index) in a text node and returns it
+// wraps a span around a substring in a text node and returns it
 export const wrapWithSpan = (
   node: Node,
   position: [number, number]

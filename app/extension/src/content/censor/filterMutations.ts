@@ -1,4 +1,3 @@
-// returns a list of nodes that have mutated and need to be censored
 export const filterTextMutations = (mutations: MutationRecord[]): Node[] => {
   let filteredNodes: Node[] = [];
   //let relevantMutations: MutationRecord[] = [];
