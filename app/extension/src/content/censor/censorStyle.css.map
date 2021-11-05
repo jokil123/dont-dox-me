@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "AAAA,AACE,OADK,AACJ,MAAM,CAAC;EACN,MAAM,EAAE,UAAU,CAAC,aAAa;CACjC;;AAHH,AAKE,OALK,AAKJ,KAAK,CAAC;EACL,KAAK,EAAE,SAAS;EAChB,gBAAgB,EAAE,KAAK;CAKxB;;AAZH,AASI,OATG,AAKJ,KAAK,AAIH,WAAW,CAAC;EACX,gBAAgB,EAAE,IAAI;CACvB",
-    "sources": [
-        "censorStyle.scss"
-    ],
-    "names": [],
-    "file": "censorStyle.css"
-}
