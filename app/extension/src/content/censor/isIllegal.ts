@@ -1,5 +1,3 @@
-// Returns a list of illegal words if found in the node
-// If none are found an empty list is returned
 export const findIllegalNodeContent = (
   node: Node,
   illegals: string[]
@@ -19,7 +17,6 @@ export const findIllegalNodeContent = (
   return pos;
 };
 
-// Searches a text for an illegal word and returns its starting indices
 export const findAllOccurrences = (text: string, match: string): number[] => {
   let occ: number[] = [];
 
