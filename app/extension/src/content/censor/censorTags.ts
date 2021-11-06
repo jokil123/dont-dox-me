@@ -8,14 +8,15 @@ export type tagCensorConfigShape = {
 export const tagCensorConfig: tagCensorConfigShape = [
   {
     tag: ["img"],
-    attr: ["src", "alt"],
+    attr: ["alt"],
   },
 ];
 
+// wraps an element in a span and returns the span
 export const wrapElementWithSpan = (element: Element): HTMLSpanElement => {
   let span = document.createElement("span");
 
-  element.parentElement && element.parentElement.replaceChild(element, span);
+  element.parentElement && element.parentElement.replaceChild(span, element);
 
   span.appendChild(element);
 
@@ -23,7 +24,7 @@ export const wrapElementWithSpan = (element: Element): HTMLSpanElement => {
 };
 
 export const findIllegalElements = (
-  base: HTMLElement,
+  base: Element,
   config: tagCensorConfigShape,
   illegals: string[]
 ): Element[] => {
@@ -35,7 +36,9 @@ export const findIllegalElements = (
     tagConfig.elements = [];
 
     tagConfig.tag.forEach((tag) => {
-      tagConfig.elements?.concat(Array.from(base.getElementsByTagName(tag)));
+      tagConfig.elements = tagConfig.elements?.concat(
+        Array.from(base.getElementsByTagName(tag))
+      );
     });
   });
 
@@ -57,4 +60,18 @@ export const findIllegalElements = (
   });
 
   return illegalElements;
+};
+
+export const censorIllegalElements = (base: Element, illegals: string[]) => {
+  let elements = findIllegalElements(base, tagCensorConfig, illegals);
+
+  let spans: HTMLSpanElement[] = [];
+
+  elements.forEach((element) => {
+    spans.push(wrapElementWithSpan(element));
+  });
+
+  spans.forEach((span) => {
+    span.className = "censor element";
+  });
 };

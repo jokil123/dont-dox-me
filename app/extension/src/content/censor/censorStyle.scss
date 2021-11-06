@@ -1,15 +1,15 @@
 // Style of censored content
 .censor {
-  &.image {
-    filter: blur(10px) saturate(0.5);
+  &.element {
+    filter: blur(10px) saturate(0.5) !important;
   }
 
   &.text {
-    color: #00000000;
-    background-color: black;
+    color: #00000000 !important;
+    background-color: black !important;
 
     &::selection {
-      background-color: blue;
+      background-color: blue !important;
     }
   }
 }

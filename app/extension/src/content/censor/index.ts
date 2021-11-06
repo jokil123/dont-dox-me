@@ -7,6 +7,7 @@ import { censorNodes } from "./censorNodes";
 import * as pageHide from "./hideWebpage";
 import { filterNodes } from "./censorIgnore";
 import { setupObserver } from "./pageMutationHandler";
+import { censorIllegalElements, wrapElementWithSpan } from "./censorTags";
 
 console.log("Content Script Loaded");
 
@@ -26,6 +27,8 @@ const main = async () => {
   pageHide.show();
 
   console.log("Censoring Finished");
+
+  censorIllegalElements(document.body, settings.rules);
 };
 
 main();
