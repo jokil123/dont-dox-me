@@ -13,10 +13,10 @@ export const tagCensorConfig: tagCensorConfigShape = [
 ];
 
 // wraps an element in a span and returns the span
-export const wrapElementWithSpan = (element: Element): HTMLSpanElement => {
+export const wrapElementWithSpan = (element: Node): HTMLSpanElement => {
   let span = document.createElement("span");
 
-  element.parentElement && element.parentElement.replaceChild(span, element);
+  element.parentNode && element.parentNode.replaceChild(span, element);
 
   span.appendChild(element);
 
@@ -25,11 +25,10 @@ export const wrapElementWithSpan = (element: Element): HTMLSpanElement => {
 
 export const findIllegalElements = (
   base: Element,
-  config: tagCensorConfigShape,
   illegals: string[]
 ): Element[] => {
   let tagConfigs: { tag: string[]; attr: string[]; elements?: Element[] }[] = [
-    ...config,
+    ...tagCensorConfig,
   ];
 
   tagConfigs.forEach((tagConfig) => {
@@ -62,9 +61,7 @@ export const findIllegalElements = (
   return illegalElements;
 };
 
-export const censorIllegalElements = (base: Element, illegals: string[]) => {
-  let elements = findIllegalElements(base, tagCensorConfig, illegals);
-
+export const censorIllegalElements = (elements: Node[]) => {
   let spans: HTMLSpanElement[] = [];
 
   elements.forEach((element) => {

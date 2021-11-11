@@ -8,3 +8,7 @@ const changeText = () => {
   // document.getElementById("mutationElement").innerText += "sus";
   // document.getElementById("mutationElement").textContent += "sus";
 };
+
+const makeSus = () => {
+  document.getElementById("susImage").alt = "sus";
+};

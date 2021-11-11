@@ -6,8 +6,8 @@ import { Settings } from "../../util/settingsInterface";
 import { censorNodes } from "./censorNodes";
 import * as pageHide from "./hideWebpage";
 import { filterNodes } from "./censorIgnore";
-import { setupObserver } from "./pageMutationHandler";
-import { censorIllegalElements, wrapElementWithSpan } from "./censorTags";
+import { setupElementObserver, setupTextObserver } from "./pageMutationHandler";
+import { censorIllegalElements, findIllegalElements } from "./censorTags";
 
 console.log("Content Script Loaded");
 
@@ -21,14 +21,16 @@ const main = async () => {
     let nodes = getTextNodesIn(document.body, true);
 
     censorNodes(filterNodes(nodes), settings.rules);
-    setupObserver(settings);
+    setupTextObserver(settings);
   }
 
   pageHide.show();
 
   console.log("Censoring Finished");
 
-  censorIllegalElements(document.body, settings.rules);
+  censorIllegalElements(findIllegalElements(document.body, settings.rules));
+
+  setupElementObserver(settings);
 };
 
 main();
