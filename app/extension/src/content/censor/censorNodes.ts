@@ -7,21 +7,23 @@ export const censorNodes = (nodes: Node[], illegals: string[]) => {
   nodes.forEach((node) => {
     let pos = findIllegalNodeContent(node, illegals);
     if (pos.length != 0) {
-      let wrapperSpan = document.createElement("span");
+      if (!node.parentElement?.matches(".censor.span")) {
+        let wrapperSpan = document.createElement("span");
 
-      if (node.parentNode) {
-        if (!node.parentElement?.matches(".censor.wrapper")) {
-          node.parentNode.replaceChild(wrapperSpan, node);
-          wrapperSpan.appendChild(node);
-          wrapperSpan.className = "censor wrapper";
+        if (node.parentNode) {
+          if (!node.parentElement?.matches(".censor.wrapper")) {
+            node.parentNode.replaceChild(wrapperSpan, node);
+            wrapperSpan.appendChild(node);
+            wrapperSpan.className = "censor wrapper";
+          }
         }
+
+        let spans = wrapWithSpans(node, pos);
+
+        spans.forEach((span) => {
+          span.className = "censor text";
+        });
       }
-
-      let spans = wrapWithSpans(node, pos);
-
-      spans.forEach((span) => {
-        span.className = "censor text";
-      });
     }
   });
 };
