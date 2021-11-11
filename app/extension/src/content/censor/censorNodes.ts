@@ -7,7 +7,7 @@ export const censorNodes = (nodes: Node[], illegals: string[]) => {
   nodes.forEach((node) => {
     let pos = findIllegalNodeContent(node, illegals);
     if (pos.length != 0) {
-      if (!node.parentElement?.matches(".censor.span")) {
+      if (!node.parentElement?.matches(".censor.text")) {
         let wrapperSpan = document.createElement("span");
 
         if (node.parentNode) {
