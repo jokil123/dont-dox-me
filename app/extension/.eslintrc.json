@@ -21,7 +21,7 @@
   "plugins": ["prettier"],
 
   "rules": {
-    "prettier/prettier": ["error", { "endOfLine": "auto" }],
+    "prettier/prettier": ["warn", { "endOfLine": "auto" }],
     "no-console": "warn",
     "prefer-const": "off",
     "no-constant-condition": "warn"
