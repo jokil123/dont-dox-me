@@ -46,10 +46,17 @@ const main = async () => {
     if (message == "settings") {
       // if for some reason no settings are cached, cache them
       if (!settings) {
-        await cacheSettings();
+        cacheSettings().then(() => {
+          reply(settings);
+          console.log("message handled slowly");
+        });
+      } else {
+        reply(settings);
       }
-      reply(settings);
     }
+
+    console.log("message handled");
+    return true; // return true to indicate that the message was handled
   });
 };
 

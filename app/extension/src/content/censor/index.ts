@@ -7,14 +7,12 @@ import { censorNodes } from "./censorNodes";
 import * as pageHide from "./hideWebpage";
 import { filterNodes } from "./censorIgnore";
 import { setupObserver } from "./pageMutationHandler";
-import { connectListener } from "../../util/asyncSendMessage";
 
 console.log("Content Script Loaded");
 
-connectListener();
-
 const main = async () => {
   console.log("Censoring Started");
+
   let settings: Settings = await loadCachedSettings();
 
   console.log(settings);
