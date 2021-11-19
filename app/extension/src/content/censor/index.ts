@@ -24,15 +24,12 @@ const main = async () => {
     setupTextObserver(settings);
 
     censorIllegalElements(findIllegalElements(document.body, settings.rules));
+    setupElementObserver(settings);
   }
 
   pageHide.show();
 
   console.log("Censoring Finished");
-
-  censorIllegalElements(findIllegalElements(document.body, settings.rules));
-
-  setupElementObserver(settings);
 };
 
 main();
