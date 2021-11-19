@@ -22,6 +22,8 @@ const main = async () => {
 
     censorNodes(filterNodes(nodes), settings.rules);
     setupTextObserver(settings);
+
+    censorIllegalElements(findIllegalElements(document.body, settings.rules));
   }
 
   pageHide.show();

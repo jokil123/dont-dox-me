@@ -3,7 +3,7 @@ import { filterElementMutations, filterTextMutations } from "./filterMutations";
 import { getTextNodesIn } from "./getTextNodes";
 import { Settings } from "../../util/settingsInterface";
 import * as pageHide from "./hideWebpage";
-import { censorIllegalElements } from "./censorTags";
+import { censorIllegalElements, filterIllegalElements } from "./censorTags";
 
 const textObserveSettings = {
   subtree: true,
@@ -45,6 +45,7 @@ export const setupTextObserver = (settings: Settings) => {
     });
 
     // at the end the observer is re-enabled
+    // console.log(document.body);
     observer.observe(document.body, textObserveSettings);
   });
 
@@ -63,25 +64,32 @@ export const setupElementObserver = (settings: Settings) => {
 
     let filteredMutations = filterElementMutations(m);
 
+    let illegalElements = filterIllegalElements(
+      filteredMutations,
+      settings.rules
+    );
+
     // makes a list of all text nodes which have to be temporarily hidden
-    let hiddenElements: HTMLElement[] = <HTMLElement[]>filteredMutations
+    let hiddenElements: HTMLElement[] = <HTMLElement[]>illegalElements
       .map((n) => {
         return n.parentElement;
       })
       .filter((n) => {
-        return n;
+        return n instanceof HTMLElement;
       });
 
     // hides all new elements until they are censored
-    hiddenElements.forEach((n) => {
-      pageHide.hide(n);
+    hiddenElements.forEach((e) => {
+      pageHide.hide(e);
     });
 
-    filteredMutations.forEach((e) => {
-      censorIllegalElements(filteredMutations);
+    censorIllegalElements(illegalElements);
+
+    hiddenElements.forEach((e) => {
+      pageHide.show(e);
     });
 
-    observer.observe(document.body, textObserveSettings);
+    observer.observe(document.body, elementObserveSettings);
   });
-  observer.observe(document.body, textObserveSettings);
+  observer.observe(document.body, elementObserveSettings);
 };

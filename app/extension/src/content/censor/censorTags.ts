@@ -45,23 +45,48 @@ export const findIllegalElements = (
 
   tagConfigs.forEach((tagConfig) => {
     tagConfig.elements?.forEach((element) => {
-      tagConfig.attr.forEach((attr) => {
-        illegals.forEach((illegal) => {
-          let elAttr = element.getAttribute(attr);
-          if (elAttr) {
-            if (findAllOccurrences(elAttr, illegal).length != 0) {
-              illegalElements.push(element);
-            }
-          }
-        });
-      });
+      if (isIllegalElement(element, illegals)) {
+        illegalElements.push(element);
+      }
     });
   });
 
   return illegalElements;
 };
 
-export const censorIllegalElements = (elements: Node[]) => {
+export const isIllegalElement = (
+  element: Element,
+  illegals: string[]
+): boolean => {
+  return tagCensorConfig.some((tagConfig) => {
+    return tagConfig.attr.some((attr) => {
+      return illegals.some((illegal) => {
+        let elAttr = element.getAttribute(attr);
+
+        if (elAttr) {
+          if (findAllOccurrences(elAttr, illegal).length != 0) {
+            return true;
+          } else {
+            return false;
+          }
+        } else {
+          return false;
+        }
+      });
+    });
+  });
+};
+
+export const filterIllegalElements = (
+  elements: Element[],
+  illegals: string[]
+): Element[] => {
+  return elements.filter((element) => {
+    return isIllegalElement(element, illegals);
+  });
+};
+
+export const censorIllegalElements = (elements: Element[]) => {
   let spans: HTMLSpanElement[] = [];
 
   elements.forEach((element) => {

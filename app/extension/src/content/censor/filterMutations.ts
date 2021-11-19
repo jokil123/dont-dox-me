@@ -11,16 +11,22 @@ export const filterTextMutations = (mutations: MutationRecord[]): Node[] => {
   return filteredNodes;
 };
 
-export const filterElementMutations = (mutations: MutationRecord[]): Node[] => {
-  let filteredElements: Node[] = [];
+export const filterElementMutations = (
+  mutations: MutationRecord[]
+): Element[] => {
+  let filteredElements: Element[] = [];
 
   mutations.forEach((mutation) => {
     if (mutation.target) {
-      filteredElements.push(mutation.target);
+      if (mutation.target instanceof Element) {
+        filteredElements.push(mutation.target);
+      }
     }
 
     mutation.addedNodes.forEach((node) => {
-      filteredElements.push(node);
+      if (node instanceof Element) {
+        filteredElements.push(node);
+      }
     });
   });
 
