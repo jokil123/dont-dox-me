@@ -4,6 +4,8 @@ import { loadSettings, overwriteSettings } from "../util/manageSettings";
 console.log('Background Script: "Hello World"');
 
 const main = async () => {
+  await chrome.runtime.sendMessage("readyToSend");
+
   // Example settings are loaded into storage
   await overwriteSettings({
     enabled: true,

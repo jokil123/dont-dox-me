@@ -10,6 +10,16 @@ import { setupObserver } from "./pageMutationHandler";
 
 console.log("Content Script Loaded");
 
+console.log(chrome.runtime);
+
+let test = chrome.runtime.onConnect.addListener(function (port) {
+  console.log(port);
+});
+
+console.log(chrome.runtime);
+
+console.log(chrome.runtime.onConnect.hasListeners());
+
 const main = async () => {
   console.log("Censoring Started");
 
