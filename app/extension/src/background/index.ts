@@ -45,20 +45,29 @@ const main = async () => {
   chrome.runtime.onMessage.addListener(async (message, sender, reply) => {
     console.log("Settings were requested", { settings });
 
-    if (message == "settings") {
-      // if for some reason no settings are cached, cache them
-      if (!settings) {
-        cacheSettings().then(() => {
+    switch (message) {
+      case "settings":
+        // if for some reason no settings are cached, cache them
+        if (!settings) {
+          cacheSettings().then(() => {
+            reply(settings);
+            console.log("message handled slowly");
+          });
+        } else {
           reply(settings);
-          console.log("message handled slowly");
-        });
-      } else {
-        reply(settings);
-      }
-    }
+        }
 
-    console.log("message handled");
-    return true; // return true to indicate that the message was handled
+        console.log("message handled");
+        return true; // return true to indicate that the message was handled
+
+      case "isReadyToSend":
+        console.log("i am readyToSend");
+        reply(true);
+        return true;
+
+      default:
+        return false;
+    }
   });
 };
 
